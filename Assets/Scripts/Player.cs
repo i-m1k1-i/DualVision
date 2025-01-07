@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private Aim _aim;
+    [SerializeField] private Shooter _shooter;
     [SerializeField] private View _currentView;
 
     private PlayerInput _playerInput;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
         _playerInput = new PlayerInput();
 
         _playerInput.Player.SwitchView.performed += OnSwitchView;
+        _playerInput.Player.Shoot.performed += cntx => _shooter.Shoot();
     }
 
     private void Update()
