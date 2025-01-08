@@ -1639,7 +1639,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967214636}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1850,6 +1850,34 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1967214637}
+    - target: {fileID: 7914166468124851962, guid: 745523e7f10af144192f3fe626059982,
+        type: 3}
+      propertyPath: _spawnDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914166468124851962, guid: 745523e7f10af144192f3fe626059982,
+        type: 3}
+      propertyPath: _enemies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914166468124851962, guid: 745523e7f10af144192f3fe626059982,
+        type: 3}
+      propertyPath: _enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 6745658696693397585, guid: 36d461edee06a2c4caf09bdac56eb25d,
+        type: 3}
+    - target: {fileID: 7914166468124851962, guid: 745523e7f10af144192f3fe626059982,
+        type: 3}
+      propertyPath: _enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 6745658696693397585, guid: 36d461edee06a2c4caf09bdac56eb25d,
+        type: 3}
+    - target: {fileID: 7914166468124851962, guid: 745523e7f10af144192f3fe626059982,
+        type: 3}
+      propertyPath: _enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 7721842671205727224, guid: 7e412a586d60a824b82b2ff872259781,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

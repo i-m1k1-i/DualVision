@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private Enemy[] _enemies;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private Transform _spawnMin;
     [SerializeField] private Transform _spawnMax;
@@ -23,12 +23,17 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn()
     {
-        Enemy enemy = Instantiate(_enemy);
+        Enemy enemy = Instantiate(GetRandomEnemy());
         Vector3 spawnPosition = GetRandomVector3(_spawnMin.position, _spawnMax.position);
         enemy.transform.position = spawnPosition;
         Debug.Log("Spawn");
     }
 
+    private Enemy GetRandomEnemy()
+    {
+        int randomIndex = Random.Range(0, _enemies.Length);
+        return _enemies[randomIndex];
+    }
 
     private Vector3 GetRandomVector3(Vector3 min, Vector3 max)
     {
