@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private BulletPool _bulletPool;
+
     public Vector3 Direction { get; set; }
 
     [SerializeField] private float _speed;
@@ -29,7 +31,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Static")
         {
-            Destroy(gameObject);
+            BulletPool.Instance.Release(this);
             return;
         }
 
@@ -39,6 +41,6 @@ public class Bullet : MonoBehaviour
         }
 
         health.TakeDamage(_damage);
-        Destroy(gameObject);
+        BulletPool.Instance.Release(this);
     }
 }
