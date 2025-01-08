@@ -1,7 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     public Vector3 Direction { get; set; }
 
@@ -29,7 +28,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Static")
         {
-            BulletPool.Instance.Release(this);
+            EnemyBulletPool.Instance.Release(this);
             return;
         }
 
@@ -39,6 +38,6 @@ public class Bullet : MonoBehaviour
         }
 
         health.TakeDamage(_damage);
-        BulletPool.Instance.Release(this);
+        EnemyBulletPool.Instance.Release(this);
     }
 }
