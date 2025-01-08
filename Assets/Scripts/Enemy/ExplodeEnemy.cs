@@ -1,20 +1,51 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ExplodeEnemy : Enemy
 {
-    [SerializeField] private float _speed;
+    [Header("Components")]
+    [SerializeField] private Moveable _moveable;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private ParticleSystem _explosion;
+
+    [Header("Explosion settings")]
+    [SerializeField] private float _explodeDistance;
+    [SerializeField] private float _damageDistance;
+    [SerializeField] private float _explodeDelay;
+    [SerializeField] private float _damage;
 
     private Vector3 _direction;
+    private bool _startExploding;
 
     private void Update()
     {
-        Move();
+        if (_startExploding)
+            return;
+
+        _moveable.Move();
+
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        if (distanceToPlayer <= _explodeDistance)
+        {
+            StartCoroutine(Explode());
+        }
     }
 
-    protected override void Move()
+    private IEnumerator Explode()
     {
-        _direction = (_player.transform.position - transform.position).normalized;
+        _startExploding = true;
+        _animator.SetBool("Explode", true);
 
-        transform.Translate(_speed * Time.deltaTime * _direction);
+        yield return new WaitForSeconds(_explodeDelay);
+
+        Instantiate(_explosion, transform.position, Quaternion.identity);
+
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        if (distanceToPlayer <= _damageDistance)
+        {
+            Health playerHealth = Player.Instance.GetComponent<Health>();
+            playerHealth.TakeDamage(_damage);
+        }
+        Destroy(gameObject);
     }
 }

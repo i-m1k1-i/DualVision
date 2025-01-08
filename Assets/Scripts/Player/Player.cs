@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private Aim _aim;
@@ -14,6 +16,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         _currentView = View.Side;
         _aim.SetActiveAim(_currentView);
         _cameraManager.SetActiveCamera(_currentView);
