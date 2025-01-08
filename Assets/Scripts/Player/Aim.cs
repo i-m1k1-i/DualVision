@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class Aim : MonoBehaviour
 {
     [SerializeField] private Transform _topAim;
-    [SerializeField] private Transform _sideAim;
     [SerializeField] private Transform _topAimPoint;
+    [SerializeField] private Transform _sideAim;
     [SerializeField] private Transform _sideAimPoint;
 
     private Transform _currentAim;
