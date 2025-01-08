@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootingEnemy : MonoBehaviour
+public class ShootingEnemy : Enemy
 {
     [SerializeField] private Moveable _moveable;
 
