@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4799568728598404054}
   - component: {fileID: 5873516611007443486}
   - component: {fileID: 1442493534888385927}
-  - component: {fileID: 8607571329089950966}
   - component: {fileID: 7721842671205727224}
   - component: {fileID: 3811037915973584991}
+  - component: {fileID: 6692116809891340612}
   m_Layer: 0
   m_Name: FlyingShooter
   m_TagString: Untagged
@@ -108,20 +108,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8607571329089950966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261515171349822924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e6b4ce2c70a1eb4cb87c7b60e30f6f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 50
-  _currentHealth: 0
 --- !u!114 &7721842671205727224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +138,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flyHeight: 2
   _speed: 3
+--- !u!114 &6692116809891340612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261515171349822924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0771c8eedd391d74d97a405f6c4474c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 50
+  _currentHealth: 0

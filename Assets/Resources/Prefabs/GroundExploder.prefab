@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7538428127506798482}
   - component: {fileID: -5669895867498037879}
   - component: {fileID: 6745658696693397585}
-  - component: {fileID: 6115958969367365780}
   - component: {fileID: -4733827185763983958}
+  - component: {fileID: 848482480086349038}
   m_Layer: 0
   m_Name: GroundExploder
   m_TagString: Untagged
@@ -178,20 +178,6 @@ MonoBehaviour:
   _damageDistance: 4
   _explodeDelay: 1
   _damage: 20
---- !u!114 &6115958969367365780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2038367888401994269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e6b4ce2c70a1eb4cb87c7b60e30f6f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _currentHealth: 0
 --- !u!114 &-4733827185763983958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,3 +191,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+--- !u!114 &848482480086349038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038367888401994269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0771c8eedd391d74d97a405f6c4474c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _currentHealth: 0
