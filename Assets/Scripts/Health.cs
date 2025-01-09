@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
-    [SerializeField] private float _maxHealth;
+    [SerializeField] protected float _maxHealth;
+    [SerializeField] protected float _currentHealth;
 
-    [SerializeField] private float _currentHealth;
+    public float CurrentHealth => _currentHealth;
+    public float MaxHealth => _maxHealth;
 
     private void Awake()
     {
@@ -21,7 +23,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void Death()
+    protected virtual void Death()
     {
         Destroy(gameObject);
     }
