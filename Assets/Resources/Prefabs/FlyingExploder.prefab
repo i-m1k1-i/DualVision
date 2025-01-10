@@ -127,7 +127,7 @@ MonoBehaviour:
     type: 3}
   _explodeDistance: 6
   _damageDistance: 7
-  _explodeDelay: 2.5
+  _explodeDelay: 2
   _damage: 30
 --- !u!114 &3811037915973584991
 MonoBehaviour:
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0771c8eedd391d74d97a405f6c4474c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 25
   _currentHealth: 0
 --- !u!95 &6944686379683444690
 Animator:
