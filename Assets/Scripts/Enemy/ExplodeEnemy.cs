@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ExplodeEnemy : Enemy
 {
-    [Header("Components")]
+    [Header("Core components")]
     [SerializeField] private Moveable _moveable;
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _explosion;

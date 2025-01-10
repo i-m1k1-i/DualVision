@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class ShootingEnemy : Enemy
 {
+    [Header("Core components")]
     [SerializeField] private Moveable _moveable;
 
+    [Header("Shooting settings")]
     [SerializeField] private float _shootDistance;
     [SerializeField] private float _shootDelay;
     [SerializeField] private float _shootDamage;
@@ -38,7 +40,7 @@ public class ShootingEnemy : Enemy
 
     private void Shoot()
     {
-       Vector3 directionToPlayer = (Player.Instance.transform.position - transform.position).normalized;
+        Vector3 directionToPlayer = (Player.Instance.transform.position - transform.position).normalized;
         EnemyBullet bullet = EnemyBulletPool.Instance.Get();
         bullet.transform.position = transform.position;
         bullet.Direction = directionToPlayer;
