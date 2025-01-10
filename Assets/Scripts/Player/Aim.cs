@@ -7,6 +7,7 @@ public class Aim : MonoBehaviour
     [SerializeField] private Transform _topAimPoint;
     [SerializeField] private Transform _sideAim;
     [SerializeField] private Transform _sideAimPoint;
+    [SerializeField] private CameraManager _cameraManager;
 
     private Transform _currentAim;
     private Transform _currentShotPoint;
@@ -53,7 +54,7 @@ public class Aim : MonoBehaviour
     private void LookAtMouseTop()
     {
         Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.transform.position.y));
+        Vector3 mouseWorldPosition = _cameraManager.CurrentCamera.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, _cameraManager.CurrentCamera.transform.position.y));
 
         Vector3 mouseDirection = mouseWorldPosition - transform.position;
         mouseDirection.Normalize();
@@ -66,7 +67,7 @@ public class Aim : MonoBehaviour
     private void LookAtMouseSide()
     {
         Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.nearClipPlane));
+        Vector3 mouseWorldPosition = _cameraManager.CurrentCamera.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, _cameraManager.CurrentCamera.nearClipPlane));
 
         Vector3 mouseDirection = mouseWorldPosition - transform.position;
         mouseDirection.Normalize();
