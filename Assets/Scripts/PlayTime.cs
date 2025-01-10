@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class PlayTime : MonoBehaviour
 {
-    private float _current = 0;
+    private static float _current = 0;
     private bool _stop;
 
-    public float Current => _current;
+    public static float Current => _current;
+
+    private void Start()
+    {
+        _current = 0;
+    }
 
     private void FixedUpdate()
     {
