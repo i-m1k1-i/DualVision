@@ -7,17 +7,24 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnDelay;
     [SerializeField] private Transform _spawnMin;
     [SerializeField] private Transform _spawnMax;
+    [SerializeField] private float _difficultyIncreasingTime;
 
 
-    private float _spawnTime;
+    private float _lastSpawnTime;
+    private float _lastDifIncreasingTime;
 
     private void Update()
     {
-        _spawnTime += Time.deltaTime;
-        if (_spawnTime >= _spawnDelay)
+        if (PlayTime.Current - _lastSpawnTime >= _spawnDelay)
         {
             Spawn();
-            _spawnTime = 0;
+            _lastSpawnTime = PlayTime.Current;
+        }
+
+        if (PlayTime.Current - _lastDifIncreasingTime >= _difficultyIncreasingTime)
+        {
+            _spawnDelay *= 0.7f;
+            _lastDifIncreasingTime = PlayTime.Current;
         }
     }
 
