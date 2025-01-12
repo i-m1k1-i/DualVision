@@ -20,6 +20,7 @@ public class RestartButton : MonoBehaviour
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         _audioSource.Play();
+        Statistics.Instance.Reset();
         _button.onClick.RemoveAllListeners();
 
         SceneManager.LoadScene(currentScene);

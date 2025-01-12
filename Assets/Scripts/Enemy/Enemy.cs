@@ -2,17 +2,18 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    protected static int _killedEnemies;
-    public static int KilledEnemies => _killedEnemies;
+    protected static int _liveEnemies;
+
+    public static int LiveEnemies => _liveEnemies;
 
     protected virtual void Awake()
     {
-        EnemyHealth health = GetComponent<EnemyHealth>();
-        health.OnDeath += CountDie;
+        _liveEnemies++;
     }
 
-    private void CountDie()
+    private void OnDestroy()
     {
-        _killedEnemies++;
+        _liveEnemies--;
+        Statistics.Instance.EnemyKilled();
     }
 }

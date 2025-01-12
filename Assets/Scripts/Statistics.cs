@@ -24,15 +24,24 @@ public class Statistics : MonoBehaviour
         }
     }
 
+    public void EnemyKilled()
+    {
+        KillPoints += _pointsForKill;
+    }
+
     public void CountStatistics()
     {
         SurvivedTime = (int)PlayTime.Current;
-        KillPoints = Enemy.KilledEnemies * _pointsForKill;
         Total = SurvivedTime + KillPoints;
 
         if (Total > BestTotal)
         {
             BestTotal = Total;
         }
+    }
+
+    public void Reset()
+    {
+        KillPoints = 0;
     }
 }

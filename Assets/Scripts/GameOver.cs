@@ -23,8 +23,8 @@ public class GameOver : MonoBehaviour
     private void HandlePlayerDeath()
     {
         _playTime.StopCounting();
-        _gameEndUI.SetActive(true);
         SetStatisticValues();
+        _gameEndUI.SetActive(true);
     }
 
     private void SetStatisticValues()
