@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveable: {fileID: -4733827185763983958}
-  _shootDistance: 6
+  _shootDistance: 8
   _shootDelay: 1
   _shootDamage: 10
 --- !u!114 &-4733827185763983958
