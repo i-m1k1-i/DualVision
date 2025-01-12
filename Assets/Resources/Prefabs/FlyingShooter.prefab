@@ -228,8 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveable: {fileID: 3811037915973584991}
   _shootDistance: 10
-  _shootDelay: 2
-  _shootDamage: 10
+  _shootDelay: 1.5
+  _shootDamage: 15
 --- !u!114 &3811037915973584991
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -152,7 +152,7 @@ MonoBehaviour:
   _moveable: {fileID: -4733827185763983958}
   _shootDistance: 8
   _shootDelay: 1
-  _shootDamage: 10
+  _shootDamage: 15
 --- !u!114 &-4733827185763983958
 MonoBehaviour:
   m_ObjectHideFlags: 0
