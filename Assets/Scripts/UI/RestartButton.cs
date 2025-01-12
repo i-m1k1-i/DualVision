@@ -1,25 +1,22 @@
-using UnityEngine;
+using Assets.Scripts.UI;
+
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class RestartButton : MonoBehaviour
+public class RestartButton : UIButton
 {
     private Button _button;
-    private AudioSource _audioSource;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _button = GetComponent<Button>();
-        _audioSource = GetComponent<AudioSource>();
-
         _button.onClick.AddListener(Restart);
     }
 
     private void Restart()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
-        _audioSource.Play();
         Statistics.Instance.Reset();
         _button.onClick.RemoveAllListeners();
 
