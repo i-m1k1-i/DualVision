@@ -38,7 +38,12 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        health.TakeDamage(_damage);
+        int remainingHP = health.TakeDamage(_damage);
+        if (remainingHP == 0)
+        {
+            Statistics.Instance.EnemyKilled();
+            Debug.Log("killed");
+        }
         BulletPool.Instance.Release(this);
     }
 }

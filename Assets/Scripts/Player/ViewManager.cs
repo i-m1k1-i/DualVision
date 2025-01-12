@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraManager : MonoBehaviour
+public class ViewManager : MonoBehaviour
 {
     [SerializeField] private Camera _sideCamera;
     [SerializeField] private Camera _topCamera;
-    [SerializeField] private RawImage _sideView;
     [SerializeField] private RawImage _topView;
 
     private bool _isSideCamera = true;
@@ -14,21 +13,19 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        UpdateActiveCamera();
+        UpdateView();
     }
 
-    public void SetActiveCamera(View view)
+    public void SetView(View view)
     {
         _isSideCamera = view == View.Side;
-        UpdateActiveCamera();
+        UpdateView();
     }
 
-    private void UpdateActiveCamera()
+    private void UpdateView()
     {
         _sideCamera.gameObject.SetActive(_isSideCamera);
-        _topView.gameObject.SetActive(_isSideCamera);
-
         _topCamera.gameObject.SetActive(!_isSideCamera);
-        _sideView.gameObject.SetActive(!_isSideCamera);
+        _topView.gameObject.SetActive(_isSideCamera);
     }
 }

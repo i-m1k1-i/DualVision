@@ -7,7 +7,7 @@ public class Aim : MonoBehaviour
     [SerializeField] private Transform _topAimPoint;
     [SerializeField] private Transform _sideAim;
     [SerializeField] private Transform _sideAimPoint;
-    [SerializeField] private CameraManager _cameraManager;
+    [SerializeField] private ViewManager _cameraManager;
 
     private Transform _currentAim;
     private Transform _currentShotPoint;

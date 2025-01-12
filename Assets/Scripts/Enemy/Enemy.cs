@@ -14,6 +14,5 @@ public abstract class Enemy : MonoBehaviour
     private void OnDestroy()
     {
         _liveEnemies--;
-        Statistics.Instance.EnemyKilled();
     }
 }

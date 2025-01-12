@@ -9,7 +9,7 @@ public class Statistics : MonoBehaviour
     public int SurvivedTime { get; private set; }
     public int KillPoints { get; private set; }
     public int Total { get; private set; }
-    public static int BestTotal { get; private set; }
+    public int BestTotal { get; private set; }
 
     private void Awake()
     {

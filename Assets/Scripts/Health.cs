@@ -16,18 +16,19 @@ public abstract class Health : MonoBehaviour
         _currentHealth = _maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public int TakeDamage(float damage)
     {
         if (_currentHealth <= 0)
-            return;
+            return -1;
 
-        _currentHealth -= damage;
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
 
         if (_currentHealth <= 0)
         {
             Death();
             OnDeath?.Invoke();
         }
+        return (int)_currentHealth;
     }
 
     protected virtual void Death()
