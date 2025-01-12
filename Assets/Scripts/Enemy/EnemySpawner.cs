@@ -1,30 +1,43 @@
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Enemy[] _enemies;
-    [SerializeField] private float _spawnDelay;
+    [SerializeField] private float _spawnInterval;
     [SerializeField] private Transform _spawnMin;
     [SerializeField] private Transform _spawnMax;
-    [SerializeField] private float _difficultyIncreasingTime;
-
+    [SerializeField] private float _newWaveInterval;
+    [SerializeField] private NewWaveAlert _alert;
 
     private float _lastSpawnTime;
-    private float _lastDifIncreasingTime;
+    private float _lastWaveStartTime;
+    private bool _spawning = true;
+    private int _wave = 1;
+    private bool _isProcessingNewWave;
 
     private void Update()
     {
-        if (PlayTime.Current - _lastSpawnTime >= _spawnDelay)
+        if (_isProcessingNewWave)
+        {
+            return;
+        }
+
+        if (IsTimePassed(_lastSpawnTime, _spawnInterval) && _spawning)
         {
             Spawn();
             _lastSpawnTime = PlayTime.Current;
         }
 
-        if (PlayTime.Current - _lastDifIncreasingTime >= _difficultyIncreasingTime)
+        if (IsTimePassed(_lastWaveStartTime, _newWaveInterval))
         {
-            _spawnDelay *= 0.7f;
-            _lastDifIncreasingTime = PlayTime.Current;
+            _spawning = false;
+            if (Enemy.LiveEnemies == 0)
+            {
+                StartNewWave();
+            }
         }
     }
 
@@ -34,6 +47,22 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPosition = GetRandomVector3(_spawnMin.position, _spawnMax.position);
         enemy.transform.position = spawnPosition;
         Debug.Log("Spawn");
+    }
+
+    private async void StartNewWave()
+    {
+        _isProcessingNewWave = true;
+        await NewWave();
+        _isProcessingNewWave = false;
+    }
+
+    private async Task NewWave()
+    {
+        _wave++;
+        await _alert.StartAlert(_wave);
+        _spawning = true;
+        _spawnInterval *= 0.7f;
+        _lastWaveStartTime = PlayTime.Current;
     }
 
     private Enemy GetRandomEnemy()
@@ -49,5 +78,10 @@ public class EnemySpawner : MonoBehaviour
         float z = Random.Range(min.z, max.z);
 
         return new Vector3(x, y, z);
+    }
+
+    private bool IsTimePassed(float since, float interval)
+    {
+        return PlayTime.Current - since >= interval;
     }
 }
