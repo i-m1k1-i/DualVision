@@ -37,7 +37,7 @@ public class EnemyBullet : MonoBehaviour
             return;
         }
 
-        health.TakeDamage(_damage);
+        health.TakeDamage(_damage * Enemy.DamageMultiplier);
         EnemyBulletPool.Instance.Release(this);
     }
 }

@@ -44,7 +44,7 @@ public class ExplodeEnemy : Enemy
         if (distanceToPlayer <= _damageDistance)
         {
             Health playerHealth = Player.Instance.GetComponent<Health>();
-            playerHealth.TakeDamage(_damage);
+            playerHealth.TakeDamage(_damage * Enemy.DamageMultiplier);
         }
         Destroy(gameObject);
     }

@@ -16,6 +16,7 @@ public class WaveController : MonoBehaviour
     private bool _isProcessingNewWave;
     private bool _spawning = true;
     private int _wave = 1;
+    private string _changingsText;
 
     private void Start()
     {
@@ -54,13 +55,26 @@ public class WaveController : MonoBehaviour
     private async Task NewWave()
     {
         _wave++;
-        await _alert.StartAlert(_wave);
-        _spawning = true;
-        _lastWaveStartTime = PlayTime.Current;
+        _changingsText = "";
         if (_wave <= 6)
         {
             _spawnInterval *= 0.7f;
+            _changingsText = "Spawn rate increased";
         }
+        if (_wave == 7)
+        {
+            Enemy.SetDamageMultiplier(2);
+            _changingsText = "Enemy damage x2";
+        }
+        if (_wave == 9)
+        {
+            Enemy.SetDamageMultiplier(4);
+            _changingsText = "Enemy damage x2";
+        }
+
+        await _alert.StartAlert(_wave, _changingsText);
+        _spawning = true;
+        _lastWaveStartTime = PlayTime.Current;
     }
 
     private bool IsTimePassed(float since, float interval)
