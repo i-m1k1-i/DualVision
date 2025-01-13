@@ -6,10 +6,10 @@ public class NewWaveAlert : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _waveValue;
     [SerializeField] private TextMeshProUGUI _changingsText;
+    [SerializeField] private AudioSource _backgroundMusic;
     [SerializeField] private float _fadeInDuration;
     [SerializeField] private float _fadeOutDuration;
     [SerializeField] private float _displayDuration;
-    [SerializeField] private AudioSource _backgroundMusic;
 
     private AudioSource _audioSource;
     private CanvasGroup _canvasGroup;
@@ -18,9 +18,8 @@ public class NewWaveAlert : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _canvasGroup = GetComponent<CanvasGroup>();
-        gameObject.SetActive(false);
-        _canvasGroup.alpha = 0;
-        
+        _canvasGroup.alpha = 1;
+        FirstWaveAlert();
     }
 
     public async Task StartAlert(int waveNum, string changingsText)
@@ -28,6 +27,11 @@ public class NewWaveAlert : MonoBehaviour
         _waveValue.text = waveNum.ToString();
         _changingsText.text = changingsText;
         gameObject.SetActive(true);
+        await FadeInAndOut();
+    }
+
+    private async void FirstWaveAlert()
+    {
         await FadeInAndOut();
     }
 
