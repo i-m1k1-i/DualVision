@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class GameOver : MonoBehaviour
     [Header("Core Components")]
     [SerializeField] private GameObject _gameEndUI;
     [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private Canvas _fullBlack;
+    [SerializeField] private AudioSource _backgroundMusic;
 
     [Header("Statistic Components")]
     [SerializeField] private PlayTime _playTime;
@@ -14,9 +17,11 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _total;
     [SerializeField] private TextMeshProUGUI _bestTotal;
 
+    private AudioSource _audioSource;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _gameEndUI.SetActive(false);
         _playerHealth.OnDeath += HandlePlayerDeath;
         Time.timeScale = 1;
@@ -26,9 +31,10 @@ public class GameOver : MonoBehaviour
     {
         _playTime.StopCounting();
         SetStatisticValues();
-        Time.timeScale = 0;
         _gameEndUI.SetActive(true);
         Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
+        _audioSource.Play();
+        StartCoroutine(FlashTransition());
     }
 
     private void SetStatisticValues()
@@ -40,6 +46,16 @@ public class GameOver : MonoBehaviour
         _enemy.text = $"{stats.KillPoints}";
         _total.text = $"{stats.Total}";
         _bestTotal.text = $"{stats.BestTotal}";
+    }
 
+    private IEnumerator FlashTransition()
+    {
+        _fullBlack.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        Time.timeScale = 0;
+        _backgroundMusic.Pause();
+        _fullBlack.gameObject.SetActive(false);
     }
 }

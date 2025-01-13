@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class NewWaveAlert : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _waveValue;
+    [SerializeField] private TextMeshProUGUI _changingsText;
     [SerializeField] private float _fadeInDuration;
     [SerializeField] private float _fadeOutDuration;
     [SerializeField] private float _displayDuration;
@@ -23,9 +23,10 @@ public class NewWaveAlert : MonoBehaviour
         
     }
 
-    public async Task StartAlert(int waveNum)
+    public async Task StartAlert(int waveNum, string changingsText)
     {
         _waveValue.text = waveNum.ToString();
+        _changingsText.text = changingsText;
         gameObject.SetActive(true);
         await FadeInAndOut();
     }
@@ -45,7 +46,7 @@ public class NewWaveAlert : MonoBehaviour
         while (_canvasGroup.alpha > 0)
         {
             _canvasGroup.alpha -= Time.deltaTime / _fadeOutDuration;
-            if (_backgroundMusic.volume < 0.7f)
+            if (_backgroundMusic.volume < 0.5f)
             {
                 _backgroundMusic.volume += Mathf.Clamp01(Time.deltaTime / (_fadeOutDuration));
             }
