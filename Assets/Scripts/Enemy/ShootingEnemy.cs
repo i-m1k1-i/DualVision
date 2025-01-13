@@ -40,6 +40,7 @@ public class ShootingEnemy : Enemy
 
     private void Shoot()
     {
+        SoundEffectsManager.Instance.PlayShotSound(false);
         Vector3 directionToPlayer = (Player.Instance.transform.position - transform.position).normalized;
         EnemyBullet bullet = EnemyBulletPool.Instance.Get();
         bullet.transform.position = transform.position;

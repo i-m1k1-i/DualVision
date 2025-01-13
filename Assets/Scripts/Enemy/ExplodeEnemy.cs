@@ -39,6 +39,7 @@ public class ExplodeEnemy : Enemy
         yield return new WaitForSeconds(_explodeDelay);
 
         Instantiate(_explosion, transform.position, Quaternion.identity);
+        SoundEffectsManager.Instance.PlayExplosionSound();
 
         float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
         if (distanceToPlayer <= _damageDistance)
