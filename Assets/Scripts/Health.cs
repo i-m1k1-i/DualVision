@@ -4,7 +4,6 @@ using UnityEngine.Events;
 
 public abstract class Health : MonoBehaviour
 {
-    public event UnityAction OnDeath;
     [SerializeField] protected float _maxHealth;
     [SerializeField] protected float _currentHealth;
 
@@ -16,20 +15,7 @@ public abstract class Health : MonoBehaviour
         _currentHealth = _maxHealth;
     }
 
-    public int TakeDamage(float damage)
-    {
-        if (_currentHealth <= 0)
-            return -1;
-
-        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
-
-        if (_currentHealth <= 0)
-        {
-            Death();
-            OnDeath?.Invoke();
-        }
-        return (int)_currentHealth;
-    }
+    public abstract void TakeDamage(float damage);
 
     protected virtual void Death()
     {
