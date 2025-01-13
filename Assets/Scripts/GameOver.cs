@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour
 
     [Header("Statistic Components")]
     [SerializeField] private PlayTime _playTime;
-    [SerializeField] private TextMeshProUGUI _time;
+    [SerializeField] private TextMeshProUGUI _waves;
     [SerializeField] private TextMeshProUGUI _enemy;
     [SerializeField] private TextMeshProUGUI _total;
     [SerializeField] private TextMeshProUGUI _bestTotal;
@@ -31,19 +31,20 @@ public class GameOver : MonoBehaviour
     {
         _playTime.StopCounting();
         SetStatisticValues();
-        _gameEndUI.SetActive(true);
+        
         Cursor.SetCursor(null, new Vector2(0, 0), CursorMode.Auto);
         _audioSource.Play();
+        _gameEndUI.SetActive(true);
         StartCoroutine(FlashTransition());
     }
 
     private void SetStatisticValues()
     {
         Statistics stats = Statistics.Instance;
-        stats.CountStatistics();
+        stats.CountBestScore();
 
-        _time.text = $"{stats.SurvivedTime}";
-        _enemy.text = $"{stats.KillPoints}";
+        _waves.text = $"{stats.WavesSurvived}";
+        _enemy.text = $"{stats.Kills}";
         _total.text = $"{stats.Total}";
         _bestTotal.text = $"{stats.BestTotal}";
     }

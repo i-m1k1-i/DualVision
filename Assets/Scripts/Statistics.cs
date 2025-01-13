@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Statistics : MonoBehaviour
 {
     public static Statistics Instance;
 
-    private const int _pointsForKill = 5;
+    [SerializeField] private WaveController _waveController;
 
-    public int SurvivedTime { get; private set; }
-    public int KillPoints { get; private set; }
+    private const int _pointsForKill = 5;
+    private const int _pointsForWave = 15;
+
+    public int WavesSurvived { get; private set; }
+    public int Kills { get; private set; }
     public int Total { get; private set; }
     public int BestTotal { get; private set; }
+
+    public event UnityAction<int> ScoreChanged;
 
     private void Awake()
     {
@@ -26,14 +32,20 @@ public class Statistics : MonoBehaviour
 
     public void EnemyKilled()
     {
-        KillPoints += _pointsForKill;
+        Kills++;
+        Total += _pointsForKill;
+        ScoreChanged?.Invoke(_pointsForKill);
     }
 
-    public void CountStatistics()
+    public void WaveComplete()
     {
-        SurvivedTime = (int)PlayTime.Current;
-        Total = SurvivedTime + KillPoints;
+        WavesSurvived += 1;
+        Total += _pointsForWave;
+        ScoreChanged?.Invoke(_pointsForWave);
+    }
 
+    public void CountBestScore()
+    {
         if (Total > BestTotal)
         {
             BestTotal = Total;
@@ -42,6 +54,8 @@ public class Statistics : MonoBehaviour
 
     public void Reset()
     {
-        KillPoints = 0;
+        Kills = 0;
+        WavesSurvived = 0;
+        Total = 0;
     }
 }
