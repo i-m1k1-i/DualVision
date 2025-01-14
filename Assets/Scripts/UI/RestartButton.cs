@@ -5,12 +5,9 @@ using UnityEngine.UI;
 
 public class RestartButton : UIButton
 {
-    private Button _button;
-
     protected override void Start()
     {
         base.Start();
-        _button = GetComponent<Button>();
         _button.onClick.AddListener(Restart);
     }
 
