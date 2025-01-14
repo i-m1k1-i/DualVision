@@ -23,8 +23,9 @@ public class EscapeHandler : MonoBehaviour
     {
         _playerInput.Enable();
     }
+
     private void OnDisable()
     {
-        _playerInput.Enable();
+        _playerInput.Disable();
     }
 }

@@ -44,8 +44,11 @@ public class NewWaveAlert : MonoBehaviour
             _canvasGroup.alpha += Time.deltaTime / _fadeInDuration;
             await Task.Yield();
         }
-        
-        await Task.Delay((int)(_displayDuration * 100));
+
+        if (_canvasGroup == null)
+        {
+            return;
+        }
 
         while (_canvasGroup.alpha > 0)
         {
