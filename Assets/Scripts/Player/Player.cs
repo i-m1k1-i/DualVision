@@ -5,12 +5,13 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
-    [SerializeField] private ViewManager _viewManager;
     [SerializeField] private PlayerMover _playerMover;
+    [SerializeField] private PlayerUI _playerUI;
+    [SerializeField] private ViewManager _viewManager;
     [SerializeField] private Aim _aim;
     [SerializeField] private Shooter _shooter;
-    [SerializeField] private View _currentView;
     [SerializeField] private Texture2D _cursorTexture;
+    [SerializeField] private View _currentView;
 
     private PlayerInput _playerInput;
     private Vector2 _inputDirection;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
         Vector2 curosrHospot = new Vector2(_cursorTexture.width / 2, _cursorTexture.height / 2);
         Cursor.SetCursor(_cursorTexture, curosrHospot, CursorMode.Auto);
 
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
 
         _playerInput.Player.SwitchView.performed += OnSwitchView;
         _playerInput.Player.Shoot.performed += cntx => _shooter.Shoot();
+        _playerInput.Navigation.Escape.performed += (cntx) => _playerUI.OnEscape();
     }
 
     private void Update()
