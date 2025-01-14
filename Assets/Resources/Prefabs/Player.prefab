@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7895911381005315475}
   - component: {fileID: 8086152406610815100}
   - component: {fileID: 8185440731757189359}
+  - component: {fileID: 2391844693418954122}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4196636999974080066}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.29, y: -2.37, z: 9.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -156,12 +157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab50ca8c5093454bba42234d6627d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewManager: {fileID: 3426863151504100444}
   _playerMover: {fileID: 6649524669177700128}
+  _playerUI: {fileID: 2391844693418954122}
+  _viewManager: {fileID: 3426863151504100444}
   _aim: {fileID: 7895911381005315475}
   _shooter: {fileID: 8086152406610815100}
-  _currentView: 0
   _cursorTexture: {fileID: 2800000, guid: 9ed1115b840986343b4016a7bd19bd92, type: 3}
+  _currentView: 0
 --- !u!114 &3426863151504100444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +236,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 0
+--- !u!114 &2391844693418954122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196636999974080066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb996f8cca942e48919625122b0e02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseCanvas: {fileID: 0}
+  _backgroundMusic: {fileID: 0}
+  _cursorTexture: {fileID: 2800000, guid: 9ed1115b840986343b4016a7bd19bd92, type: 3}
 --- !u!1 &4440358360237992402
 GameObject:
   m_ObjectHideFlags: 0
