@@ -134,6 +134,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Navigation"",
+            ""id"": ""0557077c-d22d-4686-aebb-8e46a0e174f5"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e2852b9-f09b-4a66-8778-f21860029908"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b88567dd-e954-4a07-b31b-aa3155761daa"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -160,6 +188,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_SwitchView = m_Player.FindAction("SwitchView", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        // Navigation
+        m_Navigation = asset.FindActionMap("Navigation", throwIfNotFound: true);
+        m_Navigation_Escape = m_Navigation.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,6 +310,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Navigation
+    private readonly InputActionMap m_Navigation;
+    private List<INavigationActions> m_NavigationActionsCallbackInterfaces = new List<INavigationActions>();
+    private readonly InputAction m_Navigation_Escape;
+    public struct NavigationActions
+    {
+        private @PlayerInput m_Wrapper;
+        public NavigationActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_Navigation_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_Navigation; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NavigationActions set) { return set.Get(); }
+        public void AddCallbacks(INavigationActions instance)
+        {
+            if (instance == null || m_Wrapper.m_NavigationActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_NavigationActionsCallbackInterfaces.Add(instance);
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+        }
+
+        private void UnregisterCallbacks(INavigationActions instance)
+        {
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+        }
+
+        public void RemoveCallbacks(INavigationActions instance)
+        {
+            if (m_Wrapper.m_NavigationActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(INavigationActions instance)
+        {
+            foreach (var item in m_Wrapper.m_NavigationActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_NavigationActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public NavigationActions @Navigation => new NavigationActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -293,5 +370,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSwitchView(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+    }
+    public interface INavigationActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }
